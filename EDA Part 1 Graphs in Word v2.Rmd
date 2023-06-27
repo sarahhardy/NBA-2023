@@ -1,0 +1,315 @@
+---
+title: "EDA Part 1 Graphs"
+author: "Sarah Hardy"
+date: "February 17, 2022"
+output: 
+    word_document:
+      fig_width: 8
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Run these commands section by section on your own laptop.
+The arrows above the plot window can be used to move among multiple plots.
+
+```{r }
+library(tidyverse)
+```
+# Section 1
+
+mpg is a built-in dataset that comes with R
+
+
+
+```{r }
+glimpse(mpg)
+```
+Start with some quick numeric data summaries using summary() and tables of the character/categorical variable.
+
+```{r }
+summary(mpg)
+```
+
+
+```{r}
+table(mpg$year)
+table(mpg$cyl)
+table(mpg$drv)
+table(mpg$trans)
+table(mpg$class)
+
+```
+# Simple scatterplot
+
+* Shows the relationship between two numeric variables
+* When there is an explanatory and response variable
++ Explanatory variable goes on the x-axis
++ Response variable goes on the y-axis
+
+Make scatterplots of engine size (displ) and highway mileage.
+
+## Section 2a
+
+Using base R to make the scatterplot:
+
+```{r}
+plot(hwy~displ,data=mpg)
+```
+
+## Section 2b
+
+Using ggplot() (in the tidyverse package) to make  the scatterplot:
+
+```{r}
+ggplot(mpg,aes(x=displ,y=hwy)) +
+  geom_point()
+```
+
+# Investigating the unusual points
+
+## Section 3a
+
+Show the different vehicle classes with different colors with base R. 
+
+```{r}
+
+plot(hwy~displ,data=mpg,type="n",xlim=c(min(mpg$displ),max(mpg$displ)),ylim=c(min(mpg$hwy),max(mpg$hwy)))
+points(hwy~displ,data=subset(mpg,class=="2seater"),col="blue")
+points(hwy~displ,data=subset(mpg,class=="compact"),col="red")
+points(hwy~displ,data=subset(mpg,class=="midsize"),col="green")
+points(hwy~displ,data=subset(mpg,class=="minivan"),col="pink")     
+points(hwy~displ,data=subset(mpg,class=="pickup"),col="purple")
+points(hwy~displ,data=subset(mpg,class=="subcompact"),col="orange")
+points(hwy~displ,data=subset(mpg,class=="suv"),col="cyan")
+
+```
+
+
+# Using the color aesthetic in ggplot()
+## Section 3b
+
+Show the different vehicle classes with different colors with ggplot2 by mapping the variable class to the color aesthetic.
+
+```{r}
+ggplot(mpg,aes(x=displ,y=hwy,color=class)) +
+  geom_point()
+```
+
+# More examples with the color aesthetic
+## Section 3c
+Experiment with mapping some of the other categorical variables to color
+What kind of conclusions can we make about the unusual points from looking at these plots?
+
+```{r}
+
+ggplot(mpg,aes(x=displ,y=hwy,color=trans)) +
+  geom_point()
+ggplot(mpg,aes(x=displ,y=hwy,color=drv)) +
+  geom_point()
+ggplot(mpg,aes(x=displ,y=hwy,color=fl)) +
+  geom_point()
+
+```
+
+# Using the shape aesthetic for categorical variables
+## Section 4a
+
+Categorical variables can be mapped to the shape aesthetic.
+(Although there is a limit of 6 categories.)
+
+```{r}
+#Two examples using the shape aesthetic 
+#map drv (i.e. drive shaft) to the shape aesthetic
+ggplot(mpg,aes(x=displ,y=hwy,shape=drv)) +
+  geom_point()
+#map class to the shape aesthethic
+ggplot(mpg,aes(x=displ,y=hwy,shape=class)) +
+  geom_point()
+#What happened to the suv's in the second plot?
+```
+
+# Mapping one variable to two different aesthetics
+## Section 4b
+```{r}
+#map drv to both color and shape
+ggplot(mpg,aes(x=displ,y=hwy,color=drv, shape=drv)) +
+  geom_point()
+```
+```{r}
+
+```
+# Using the color aesthetic for numeric variables
+## Section 5a
+
+Numeric variables can also be mapped to the color aesthetic. Instead of separate discrete color, there will be a single color with a gradient from low to high values. The default color is blue and the default direction of the gradient is dark shades for lower numbers and light shades for higher numbers.
+
+```{r}
+# Using the color aesthetic for numeric variables
+
+ggplot(mpg,aes(x=displ, y=hwy, color=cty)) +
+  geom_point()
+ggplot(mpg,aes(x=displ, y=hwy, color=cyl)) +
+  geom_point()
+
+```
+```{r}
+
+```
+
+## Section 5b
+
+```{r}
+# How many values does year have in this dataset?
+table(mpg$year)
+
+#Why doesn't a color gradient make sense for the year variable?
+#(Hint: Look at the legend)
+
+ggplot(mpg,aes(x=displ, y=hwy, color=year)) +
+  geom_point()
+
+# Would be better to show the two years as two distinct colors
+```
+
+
+# Using as.factor() to convert a numeric variable to a categorical variable
+## Section 6a
+```{r}
+#Although year is a numeric variables, it is not continuous 
+#and has only two values
+#so it makes more sense to treat it as categorical.
+#Use as.factor(year) to convert year to a categorical variable.
+
+ggplot(mpg,aes(x=displ, y=hwy, color=as.factor(year)))  +
+  geom_point()
+```
+
+## Section 6b
+
+```{r}
+#the variable cyl could also be treated as categorical 
+
+ggplot(mpg,aes(x=displ,y=hwy,color=as.factor(cyl))) +
+  geom_point()
+
+```
+
+
+# Using the size aesthetic for numeric variables
+## Section 7
+* A potential issue with using the size aesthetic is overplotting.
+
+```{r}
+ggplot(mpg,aes(x=displ,y=hwy,size=cyl)) +
+  geom_point()
+
+#What is the warning message that you get with the next plot?
+ggplot(mpg,aes(x=displ,y=hwy,size=class)) +
+  geom_point()
+
+
+```
+
+
+# Using the geom_smooth() geometry to add a trend line
+## Section 8
+```{r}
+#Adding a trend line to a scatterplot
+
+ggplot(mpg,aes(x=displ,y=hwy)) +
+  geom_point() + #note there is another + indicating another layer will follow
+  geom_smooth()
+```
+
+# Setting aesthetics manually
+
+Aesthetic properties can also be set manually to a constant value in a geometry geom_xxx() layer (instead of being mapped to a variable). In this case they only change the appearance of that geometry (for example, points or lines) in the plot. 
+
+Aesthetic properties that can be set manually for points are: 
+
+- The name of a color as a character string.
+- The size of a point in mm.
+- The shape of a point as a number, as shown in figure below
+- The alpha (i.e. transparency) as a number between 0 and 1 
+
+Aesthetic properties that can be set manually for line are: 
+
+- The name of a color as a character string.
+- The size (i.e. thickness) of the line in mm.
+- The linetype as a number or a name: 0 = blank, 1 = solid, 2 = dashed, 3 = dotted, 4 = dotdash, 5 = longdash, 6 = twodash, as shown in the figure below:
+
+
+# Using color= to specify a constant value in a geometry 
+## Section 9
+```{r}
+#Can specify colors to be used for geometries with color=
+#Instead of being mapped to a variable, color is mapped to a constant value, i.e. a specific color
+#note, the specific value goes in quotes 
+ggplot(mpg,aes(x=displ,y=hwy)) +
+  geom_point(color="purple") +
+  geom_smooth(color="red")
+
+```
+# There 657 colors!
+## Section 10
+```{r, results=FALSE}
+colors() #prints a list to the console winddow
+```
+## Another example with color=
+## Section 11
+```{r}
+ggplot(mpg,aes(x=displ,y=hwy)) +
+  geom_point(color="maroon3")+
+  geom_smooth(color="turquoise4")
+```
+
+# Using size= and alpha= to specify a point size  and/or transparency level
+## Section 12
+In this example, the color, size and alpha aesthetic are set manually.
+Setting the transparency with alpha= is very helpful when there are overlapping points.
+
+```{r,warning=FALSE}
+
+#Setting color and size manually
+
+ggplot(mpg,aes(x=displ,y=hwy)) + 
+  geom_point(color="blue",size=3)
+
+#Setting the transparency manually with alpha property
+
+ggplot(mpg,aes(x=displ,y=hwy)) + 
+  geom_point(color="blue",size=3,alpha=.3)
+
+```
+
+# Using geom_jitter() when points are being overplotted
+## Section 13
+Using the geom_jitter geometry is helpful when there are points being plotted on top of each other. It is just like geom_point(), but with a small amount of random noise added.
+
+```{r,warning=FALSE, echo=FALSE}
+
+
+ggplot(mpg,aes(x=displ,y=hwy)) + 
+  geom_jitter(color="blue",size=3,alpha=.3)
+
+```
+
+# Mapping an aesthetic to a condition instead of a variable
+## Section 14
+
+```{r}
+#What happens if you map an aesthetic to a condition instead of a variable? 
+
+ggplot(mpg, aes(x = displ, y = hwy, color = displ < 4)) +
+  geom_point()
+
+ggplot(mpg, aes(x = displ, y = hwy, color = cty > 17)) +
+  geom_point()
+
+
+
+```
+
