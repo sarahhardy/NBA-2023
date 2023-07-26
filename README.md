@@ -4,8 +4,9 @@
 # NBA-2023
 SQLite Examples with NBA data
 # Table of Contents
-
-
+- [Original teams](#Original teams)
+  - 
+# Original teams
 # What original teams are still playing in the NBA? 
 SELECT nickname, city, abbreviation, year_founded<br>
 FROM team<br>
