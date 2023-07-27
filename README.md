@@ -19,7 +19,7 @@ SELECT count(*) AS count, country<br>
 FROM common_player_info<br>
 WHERE country NOT LIKE 'USA' and STRFTIME('%Y','now') - from_year <= 20<br>
 GROUP BY country<br>
-HAVING count >=2
+HAVING count >=2<br>
 ORDER BY count DESC<br>
 ;<br>
 Results:<br>
@@ -35,7 +35,7 @@ WHERE cpi.country NOT LIKE 'USA'<br>
 	            &emsp;  AND p.is_active = 1<br>
 ;<br>
 Results: 26 <br>
-### Who are the currently active players came to the NBA from a country other than the USA?
+### Who are the currently active players came to the NBA from a country other than the USA and how long have they been playing?
 
 SELECT cpi.person_id,<br>
    		&emsp cpi.display_first_last AS name,<br>
@@ -50,6 +50,11 @@ WHERE cpi.country NOT LIKE 'USA'<br>
    	  &emsp; AND is_active = 1<br>
 ORDER BY nba_years DESC<br>
 ;<br>
+
+Results: Kyrie Irving from Australia has been playing in the NBA for 11 years is the foreign player who has been playing the longest.
+The complete list of all 26 foreign players can be found in current_foreign_players.csv.
+
+
 # Data Sources:
 1. Walsh, Wyatt (2023, June). NBA Database, Daily Updated SQLite Database. Retrieved June 21, 2023 from
    https://www.kaggle.com/datasets/wyattowalsh/basketball.
