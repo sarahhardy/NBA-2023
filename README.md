@@ -52,7 +52,7 @@ ORDER BY nba_years DESC<br>
 ;<br>
 
 Results: Kyrie Irving from Australia has been playing in the NBA for 11 years is the foreign player who has been playing the longest.
-The complete list of all 26 foreign players can be found in current_foreign_players.csv.
+The complete list of all 26 foreign players can be found in [current_foreign_players.csv](current_foreign_players.csv).
 
 
 # Data Sources:
