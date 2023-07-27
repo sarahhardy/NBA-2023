@@ -1,0 +1,27 @@
+person_id,name,country,from_year,nba_years,player_id,is_active
+202681,Kyrie Irving,Australia,2011.0,11.0,202681,1
+203458,Alex Len,Ukraine,2013.0,9.0,203458,1
+203994,Jusuf Nurkic,Bosnia and Herzegovina,2014.0,8.0,203994,1
+203952,Andrew Wiggins,Canada,2014.0,8.0,203952,1
+203999,Nikola Jokic,Serbia,2015.0,7.0,203999,1
+1626246,Boban Marjanovic,Serbia,2015.0,7.0,1626246,1
+1627750,Jamal Murray,Canada,2016.0,6.0,1627750,1
+1627826,Ivica Zubac,Croatia,2016.0,6.0,1627826,1
+1628449,Chris Boucher,Saint Lucia,2017.0,5.0,1628449,1
+1628374,Lauri Markkanen,Finland,2017.0,5.0,1628374,1
+1628464,Daniel Theis,Germany,2017.0,5.0,1628464,1
+1628983,Shai Gilgeous-Alexander,Canada,2018.0,4.0,1628983,1
+1628392,Isaiah Hartenstein,Germany,2018.0,4.0,1628392,1
+1629004,Svi Mykhailiuk,Ukraine,2018.0,4.0,1629004,1
+1629139,Yuta Watanabe,Japan,2018.0,4.0,1629139,1
+1628981,Bruno Fernando,Angola,2019.0,3.0,1628981,1
+1629662,Mfiondu Kabengele,Canada,2019.0,3.0,1629662,1
+1630173,Precious Achiuwa,Nigeria,2020.0,2.0,1630173,1
+1628962,Udoka Azubuike,Nigeria,2020.0,2.0,1628962,1
+1630177,Theo Maledon,France,2020.0,2.0,1630177,1
+1630208,Nick Richards,Jamaica,2020.0,2.0,1630208,1
+1630209,Omer Yurtseven,Turkey,2020.0,2.0,1630209,1
+1630581,Josh Giddey,Australia,2021.0,1.0,1630581,1
+1630613,Duane Washington Jr.,Germany,2021.0,1.0,1630613,1
+1631323,Simone Fontecchio,Italy,2022.0,0.0,1631323,1
+1631320,Chima Moneke,Nigeria,2022.0,0.0,1631320,1
