@@ -8,12 +8,12 @@ WHERE year_founded =<br>
  &emsp; (SELECT MIN(year_founded) FROM team)<br>
 ORDER BY abbreviation ASC<br>
 ;<br>
-Results:<br>
+**Results:** <br>
 <img width="281" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/89afe0e9-543a-4478-9d59-9c1b1aaf34a6">
 
 # Foreign Talent
 ## Over the last 20 years, which non-US countries have had the most players play in the NBA?
-<b>Include only those with 2 or more players.</b>
+Note: Include only those with 2 or more players.
 
 SELECT count(*) AS count, country<br>
 FROM common_player_info<br>
@@ -22,7 +22,7 @@ GROUP BY country<br>
 HAVING count >=2<br>
 ORDER BY count DESC<br>
 ;<br>
-Results:<br>
+**Results:** <br>
 <img width="114" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/6e6265fe-c15e-48ec-9d59-9f003f79876d">
 
 ## Currently active foreign talent
@@ -34,11 +34,12 @@ INNER JOIN player AS p<br>
 WHERE cpi.country NOT LIKE 'USA'<br>
 	            &emsp;  AND p.is_active = 1<br>
 ;<br>
-Results: 26 <br>
-### Who are the currently active players came to the NBA from a country other than the USA and how long have they been playing?
+**Results:** 26 currently active players came to the NBA from a country other than the USA. <br>
+
+### Who are the currently active foreign players and how long have they been playing? Who has been playing for the longest?
 
 SELECT cpi.person_id,<br>
-   		&emsp cpi.display_first_last AS name,<br>
+   		&emsp; cpi.display_first_last AS name,<br>
    		&emsp; cpi.country,<br>
    		&emsp; cpi.from_year,<br>
    		&emsp; (cpi.to_year - cpi.from_year) AS nba_years,<br>
@@ -51,9 +52,86 @@ WHERE cpi.country NOT LIKE 'USA'<br>
 ORDER BY nba_years DESC<br>
 ;<br>
 
-Results: Kyrie Irving from Australia has been playing in the NBA for 11 years is the foreign player who has been playing the longest.
+**Results:** Kyrie Irving from Australia,who has been playing in the NBA for 11 years, is the foreign player who has been playing the longest.
 The complete list of all 26 foreign players can be found in [current_foreign_players.csv](current_foreign_players.csv).
 
+# Traded Players
+## Which players played for more than one team in 2022-2023?
+
+SELECT player, count_teams<br>
+ FROM <br>
+ ( <br>
+&emsp;	SELECT count(*) AS count_teams,  player <br>
+&emsp;	FROM player_stats <br>
+&emsp;	GROUP BY player <br>
+&emsp;	HAVING count(*) > 1 <br>
+&emsp;	ORDER BY count_teams DESC, player <br>
+) <br>
+; <br>
+**Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
+The complete list of all 70 players can be found in 
+
+## Which teams did the players who played for more than one team in 2022-2023 play for?
+
+SELECT player, tm <br>
+FROM player_stats <br>
+WHERE player IN <br>
+&emsp;	( <br>
+&emsp;SELECT player <br>
+	&emsp;	FROM <br>
+		&emsp;	&emsp;( <br>
+		&emsp;	&emsp; SELECT count(*) AS count_teams, player <br>
+		&emsp;	&emsp;	FROM player_stats <br>
+		&emsp;	&emsp;	GROUP BY player <br>
+		&emsp;	&emsp;	HAVING count(*) > 1 <br>
+		&emsp;	&emsp;	ORDER BY count_teams DESC <br>
+		&emsp;	&emsp;	) <br>
+	) <br>
+ORDER BY player <br>
+;<br>
+**Result:**
+<br>
+
+## Which team was involved in the most midseason trades?
+## Query that returns only teams involved in a midseason trade
+
+**Results:** 27 of the 30 team were involved in a trade. <br>
+
+## Query that returns all teams with a count of how many players on their 2022-23 roster were traded during the season
+
+Notes: 
+1. Any one trade will result in 2 or more players on the roster involved in a trade.
+1. This query returns all 30 teams, including 3 that did not make trades. For these 3 teams, count_trades is originally NULL, but the NULL is replaced
+with a zero.
+
+SELECT team.full_name,<br>
+&emsp;       abbreviation,<br>
+&emsp;	   -- Replace the NULLs with zeros for the teams that had no trades<br>
+&emsp;	  ifnull(trades.count_teams,0) AS count_trades	<br>
+FROM team<br>
+LEFT OUTER JOIN (<br>
+&emsp;		SELECT count(*) AS count_teams,<br> 
+&emsp;	&emsp;			   ps.tm,<br>
+&emsp;	&emsp;			   team.full_name <br>
+&emsp;		FROM player_stats AS ps <br>
+&emsp;		INNER JOIN team <br>
+&emsp;	&emsp;			ON team.abbreviation = ps.tm <br>	
+&emsp;		WHERE ps.player IN <br>
+&emsp;	&emsp;			(SELECT player <br>
+&emsp;	&emsp;				 FROM <br>
+&emsp;	&emsp;					( <br>
+&emsp;	&emsp;	&emsp;				SELECT count(*) AS count_teams, player <br>
+&emsp;	&emsp;	&emsp;					FROM player_stats <br>
+&emsp;	&emsp;	&emsp;						GROUP BY player <br>
+&emsp;	&emsp;	&emsp;						HAVING count(*) > 1 <br>
+&emsp;	&emsp;	&emsp;						ORDER BY count_teams DESC <br>
+&emsp;	&emsp;	&emsp;						)
+&emsp;	&emsp;			) <br>
+		GROUP BY tm) AS trades <br>
+ON trades.tm = team.abbreviation <br>
+ORDER BY count_trades DESC <br>
+; <br>
+**Result:**
 
 # Data Sources:
 1. Walsh, Wyatt (2023, June). NBA Database, Daily Updated SQLite Database. Retrieved June 21, 2023 from
