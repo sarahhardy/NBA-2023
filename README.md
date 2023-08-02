@@ -16,7 +16,8 @@ ORDER BY abbreviation ASC<br>
 ## Over the last 20 years, which non-US countries have had the most players play in the NBA?
 
 Note: Includes only those countries with 2 or more NBA players.
-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
 SELECT count(*) AS count, country<br>
 FROM common_player_info<br>
 WHERE country NOT LIKE 'USA' and STRFTIME('%Y','now') - from_year <= 20<br>
@@ -74,8 +75,9 @@ SELECT player, count_teams<br>
 The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
 
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
+
 Note: Each team the player played for is included.
------------------------------------------
+
 SELECT player, tm <br>
 FROM player_stats <br>
 WHERE player IN <br>
