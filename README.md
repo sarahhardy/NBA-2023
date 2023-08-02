@@ -13,8 +13,8 @@ ORDER BY abbreviation ASC<br>
 
 # Foreign Talent
 ## Over the last 20 years, which non-US countries have had the most players play in the NBA?
-Note: Include only those with 2 or more players.
-
+Note: Includes only those countries with 2 or more NBA players.
+----------------------------------------------------------------------
 SELECT count(*) AS count, country<br>
 FROM common_player_info<br>
 WHERE country NOT LIKE 'USA' and STRFTIME('%Y','now') - from_year <= 20<br>
@@ -72,7 +72,8 @@ SELECT player, count_teams<br>
 The complete list of all 70 players can be found in 
 
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
-
+Note: Each team the player played for is included.
+-----------------------------------------
 SELECT player, tm <br>
 FROM player_stats <br>
 WHERE player IN <br>
@@ -93,17 +94,17 @@ ORDER BY player <br>
 <br>
 
 ## Which team was involved in the most midseason trades?
-## Query that returns only teams involved in a midseason trade
+### Query that returns only teams involved in a midseason trade
 
 **Results:** 27 of the 30 team were involved in a trade. <br>
 
-## Query that returns all teams with a count of how many players on their 2022-23 roster were traded during the season
+### Query that returns all teams with a count of how many players on their 2022-23 roster were traded during the season
 
 Notes: 
 1. Any one trade will result in 2 or more players on the roster involved in a trade.
 1. This query returns all 30 teams, including 3 that did not make trades. For these 3 teams, count_trades is originally NULL, but the NULL is replaced
 with a zero.
-
+----------------------------------------------------
 SELECT team.full_name,<br>
 &emsp;       abbreviation,<br>
 &emsp;	   -- Replace the NULLs with zeros for the teams that had no trades<br>
