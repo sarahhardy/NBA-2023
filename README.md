@@ -2,6 +2,7 @@
 # NBA-2023
 SQLite Examples with NBA data
 # What original teams are still playing in the NBA? 
+
 SELECT nickname, city, abbreviation, year_founded<br>
 FROM team<br>
 WHERE year_founded =<br> 
@@ -13,6 +14,7 @@ ORDER BY abbreviation ASC<br>
 
 # Foreign Talent
 ## Over the last 20 years, which non-US countries have had the most players play in the NBA?
+
 Note: Includes only those countries with 2 or more NBA players.
 ----------------------------------------------------------------------
 SELECT count(*) AS count, country<br>
@@ -69,7 +71,7 @@ SELECT player, count_teams<br>
 ) <br>
 ; <br>
 **Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
-The complete list of all 70 players can be found in 
+The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
 
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
 Note: Each team the player played for is included.
