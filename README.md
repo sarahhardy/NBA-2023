@@ -65,6 +65,8 @@ The complete list of all 26 foreign players can be found in [current_foreign_pla
 ----------------------------
 # Traded Players
 ## How many players played for more than one team during the 2022-2023 season?
+
+
 SELECT count(*) AS count_teams,  player <br>
 FROM player_stats <br>
 GROUP BY player <br>
@@ -81,6 +83,14 @@ SELECT player, count_teams<br>
 &emsp;	ORDER BY count_teams DESC, player <br>
 ) <br>
 ; <br>
+
+SELECT count(*) AS count_teams,
+		player 
+FROM player_stats
+GROUP BY player
+HAVING count(*) > 1
+ORDER BY count_teams DESC
+;
 **Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
 The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
 
@@ -102,6 +112,8 @@ GROUP BY pos <br>
 **Result:** Positions of the traded players are fairly evenly distributed, with point guards and shooting guards being traded slightly more often than other positions.
 
 ![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/9b3cd005-ddbf-4c68-8245-a62cfca4069a)
+
+<img width="122" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/1c6d5289-0523-481d-90c8-fdd4b0264938">
 
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
 
