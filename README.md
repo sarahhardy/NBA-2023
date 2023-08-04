@@ -21,7 +21,7 @@ ORDER BY abbreviation ASC<br>
 
 Note: Includes only those countries with 2 or more NBA players.
 
------------------------------------------------------------------------
+------------
 SELECT count(*) AS count, country<br>
 FROM common_player_info<br>
 WHERE country NOT LIKE 'USA' and STRFTIME('%Y','now') - from_year <= 20<br>
