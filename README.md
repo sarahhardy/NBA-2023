@@ -1,6 +1,7 @@
 
 # NBA-2023
 SQLite Examples with NBA data
+
 # What original teams are still playing in the NBA? 
 
 SELECT nickname, city, abbreviation, year_founded<br>
@@ -58,8 +59,9 @@ ORDER BY nba_years DESC<br>
 **Results:** Kyrie Irving from Australia,who has been playing in the NBA for 11 years, is the foreign player who has been playing the longest.
 The complete list of all 26 foreign players can be found in [current_foreign_players.csv](current_foreign_players.csv).
 
+----------------------------
 # Traded Players
-## Which players played for more than one team in 2022-2023?
+## How many players played for more than one team during the 2022-2023 season?
 
 SELECT player, count_teams<br>
  FROM <br>
@@ -73,6 +75,8 @@ SELECT player, count_teams<br>
 ; <br>
 **Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
 The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
+
+------------------------
 
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
 
@@ -94,21 +98,15 @@ WHERE player IN <br>
 	) <br>
 ORDER BY player <br>
 ;<br>
-**Result:**
-<br>
+**Result:** Dataset idenitifying both teams the 70 traded players played for:  [traded_players_with_teams.csv](traded_players_with_teams.csv).<br>
 
-## Which team was involved in the most midseason trades?
-### Query that returns only teams involved in a midseason trade
+------------------
 
-**Results:** 27 of the 30 team were involved in a trade. <br>
-
-### Query that returns all teams with a count of how many players on their 2022-23 roster were traded during the season
-
+## How many teams were involved in midseason trades? Which team had the most traded players on their roster?
 Notes: 
-1. Any one trade will result in 2 or more players on the roster involved in a trade.
-1. This query returns all 30 teams, including 3 that did not make trades. For these 3 teams, count_trades is originally NULL, but the NULL is replaced
-with a zero.
-----------------------------------------------------
+1. Any one trade tranaction will result in 2 or more players on the roster involved in a trade. Trades in this output refers to traded players on the roster, not to trade transactions.
+   
+-----------------------   
 SELECT team.full_name,<br>
 &emsp;       abbreviation,<br>
 &emsp;	   -- Replace the NULLs with zeros for the teams that had no trades<br>
@@ -136,7 +134,51 @@ LEFT OUTER JOIN (<br>
 ON trades.tm = team.abbreviation <br>
 ORDER BY count_trades DESC <br>
 ; <br>
+
+**Results:** 27 of the 30 team were involved in a trade. The Los Angeles Lakers, with 13 traded players on their roster, had the most traded players. From the ESPN website:<br>
+
+-------------------------------------
+
+### Query that returns all 30 teams with a count of how many players on their 2022-23 roster were traded during the season and their winning percentage.
+
+Note: 
+1. Any one trade will result in 2 or more players on the roster involved in a trade. This query returns all 30 teams, including 3 that did not make trades. For these 3 teams, count_trades is originally NULL, but the NULL is replaced
+with a zero.
+----------------------------------------------------
+SELECT team.full_name,<br>
+&emsp;       abbreviation,<br>
+&emsp; 	   ts.WIN_pct,<br>
+&emsp;	   -- Replace the NULLs with zeros for the teams that had no trades<br>
+&emsp;	  ifnull(trades.count_teams,0) AS count_trades	<br>
+FROM team<br>
+LEFT OUTER JOIN (<br>
+&emsp;		SELECT count(*) AS count_teams,<br> 
+&emsp;	&emsp;			   ps.tm,<br>
+&emsp;	&emsp;			   team.full_name <br>
+&emsp;		FROM player_stats AS ps <br>
+&emsp;		INNER JOIN team <br>
+&emsp;	&emsp;			ON team.abbreviation = ps.tm <br>	
+&emsp;		WHERE ps.player IN <br>
+&emsp;	&emsp;			(SELECT player <br>
+&emsp;	&emsp;				 FROM <br>
+&emsp;	&emsp;					( <br>
+&emsp;	&emsp;	&emsp;				SELECT count(*) AS count_teams, player <br>
+&emsp;	&emsp;	&emsp;					FROM player_stats <br>
+&emsp;	&emsp;	&emsp;						GROUP BY player <br>
+&emsp;	&emsp;	&emsp;						HAVING count(*) > 1 <br>
+&emsp;	&emsp;	&emsp;						ORDER BY count_teams DESC <br>
+&emsp;	&emsp;	&emsp;						)
+&emsp;	&emsp;			) <br>
+		GROUP BY tm) AS trades <br>
+ON trades.tm = team.abbreviation <br>
+INNER JOIN team_stats AS ts -- Add in team_stats to get WIN_pct <br>
+ON ts.abbreviation = team.abbreviation
+ORDER BY count_trades DESC <br>
+; <br>
+
 **Result:**
+
+----------------
 
 # Data Sources:
 1. Walsh, Wyatt (2023, June). NBA Database, Daily Updated SQLite Database. Retrieved June 21, 2023 from
