@@ -1,0 +1,31 @@
+full_name,abbreviation,WIN_pct,RANK,count_trades
+Los Angeles Lakers,LAL,0.524,22,13
+Los Angeles Clippers,LAC,0.537,21,7
+Dallas Mavericks,DAL,0.463,26,6
+Portland Trail Blazers,POR,0.402,28,6
+Utah Jazz,UTA,0.451,27,6
+Detroit Pistons,DET,0.207,15,6
+Atlanta Hawks,ATL,0.5,8,5
+Minnesota Timberwolves,MIN,0.512,23,5
+Philadelphia 76ers,PHI,0.659,3,5
+San Antonio Spurs,SAS,0.268,30,5
+Denver Nuggets,DEN,0.646,16,4
+Houston Rockets,HOU,0.268,29,4
+Miami Heat,MIA,0.537,7,4
+Milwaukee Bucks,MIL,0.707,1,4
+New York Knicks,NYK,0.573,5,4
+Orlando Magic,ORL,0.415,13,4
+Indiana Pacers,IND,0.427,11,4
+Oklahoma City Thunder,OKC,0.488,25,4
+Washington Wizards,WAS,0.427,12,4
+Chicago Bulls,CHI,0.488,10,3
+Toronto Raptors,TOR,0.5,9,3
+Boston Celtics,BOS,0.695,2,2
+Cleveland Cavaliers,CLE,0.622,4,2
+New Orleans Pelicans,NOP,0.512,24,2
+Golden State Warriors,GSW,0.537,20,2
+Memphis Grizzlies,MEM,0.622,17,2
+Sacramento Kings,SAC,0.585,18,1
+Brooklyn Nets,BKN,0.549,6,0
+Phoenix Suns,PHX,0.549,19,0
+Charlotte Hornets,CHA,0.329,14,0
