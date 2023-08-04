@@ -13,8 +13,9 @@ ORDER BY abbreviation ASC<br>
 **Results:** <br>
 <img width="281" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/89afe0e9-543a-4478-9d59-9c1b1aaf34a6">
 
+-----------------------------------
 # Foreign Talent
--------------------------------------------------------------------
+
 ## Over the last 20 years, which non-US countries have had the most players play in the NBA?
 
 Note: Includes only those countries with 2 or more NBA players.
