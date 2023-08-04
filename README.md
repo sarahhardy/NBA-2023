@@ -31,7 +31,6 @@ ORDER BY count DESC<br>
 **Results:** <br>
 <img width="114" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/6e6265fe-c15e-48ec-9d59-9f003f79876d">
 
-------------------------------------
 ## Currently active foreign talent
 ### How many currently active players came to the NBA from a country other than the USA?
 SELECT count(*) AS count_players<br>
@@ -87,21 +86,22 @@ The complete list of all 70 players can be found in  [traded_players.csv](traded
 
 ## What were the positions of the traded players?
 
-SELECT pos, count() as count_position
- FROM
-(
-	SELECT count(*) AS count_teams, 
-		   player,pos
-	FROM player_stats
-	GROUP BY player
-	HAVING count(*) > 1
-	ORDER BY count_teams DESC
-)
-GROUP BY pos
-;
-**Result:** Positions of the traded players are fairly evenly distributed, with point guards and shooting guards being traded slightly more often than other positions.
-![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/9b3cd005-ddbf-4c68-8245-a62cfca4069a)
+SELECT pos, count() as count_position<br>
+ FROM<br>
+(<br>
+	SELECT count(*) AS count_teams, <br>
+		   player,pos <br>
+	FROM player_stats <br>
+	GROUP BY player <br>
+	HAVING count(*) > 1 <br>
+	ORDER BY count_teams DESC <br>
+) <br>
+GROUP BY pos <br>
+; <br>
 
+**Result:** Positions of the traded players are fairly evenly distributed, with point guards and shooting guards being traded slightly more often than other positions.
+
+![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/9b3cd005-ddbf-4c68-8245-a62cfca4069a)
 
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
 
