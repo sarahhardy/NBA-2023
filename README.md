@@ -106,10 +106,8 @@ ORDER BY player <br>
 ------------------
 
 ## How many teams were involved in midseason trades? Which team had the most traded players on their roster?
-Notes: 
-1. Any one trade tranaction will result in 2 or more players on the roster involved in a trade. Trades in this output refers to traded players on the roster, not to trade transactions.
-   
------------------------   
+Note: Any one trade tranaction will result in 2 or more players on the roster involved in a trade. Trades in this output refers to traded players on the roster, not to trade transactions.
+     
 SELECT team.full_name,<br>
 &emsp;       abbreviation,<br>
 &emsp;	   -- Replace the NULLs with zeros for the teams that had no trades<br>
@@ -138,10 +136,9 @@ ON trades.tm = team.abbreviation <br>
 ORDER BY count_trades DESC <br>
 ; <br>
 
-**Results:** 27 of the 30 team were involved in a trade. The Los Angeles Lakers, with 13 traded players on their roster, had the most traded players. From the ESPN website:<br>
+**Results:** 27 of the 30 team were involved in a trade. The Los Angeles Lakers, with 13 traded players on their roster, had the most traded players. A complete listing with all 30 teams can be found in the next query.
 
 -------------------------------------
-
 ### Query that returns all 30 teams with a count of how many players on their 2022-23 roster were traded during the season and their winning percentage.
 
 Note: Any one trade will result in 2 or more players on the roster involved in a trade. This query returns all 30 teams, including 3 that did not make trades. For these 3 teams, count_trades is originally NULL, but the NULL is replaced
@@ -178,10 +175,10 @@ ON ts.abbreviation = team.abbreviation
 ORDER BY count_trades DESC <br>
 ; <br>
 
-**Result:**
+**Result:**  [team_trades_and_winpts.csv](team_trades_and_winpts.csv).<br>
 
-----------------
 
+--------------------
 # Data Sources:
 1. Walsh, Wyatt (2023, June). NBA Database, Daily Updated SQLite Database. Retrieved June 21, 2023 from
    https://www.kaggle.com/datasets/wyattowalsh/basketball.
