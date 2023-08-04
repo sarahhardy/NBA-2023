@@ -43,7 +43,7 @@ WHERE cpi.country NOT LIKE 'USA'<br>
 ;<br>
 **Results:** 26 currently active players came to the NBA from a country other than the USA. <br>
 
-----------------------------
+
 ### Who are the currently active foreign players and how long have they been playing? Who has been playing for the longest?
 
 SELECT cpi.person_id,<br>
@@ -80,7 +80,6 @@ SELECT player, count_teams<br>
 **Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
 The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
 
-----------------------------------------
 ## Which teams did the players who played for more than one team in 2022-2023 play for?
 
 Note: Each team the player played for is included.
@@ -103,7 +102,6 @@ ORDER BY player <br>
 ;<br>
 **Result:** Dataset idenitifying both teams the 70 traded players played for:  [traded_players_with_teams.csv](traded_players_with_teams.csv).<br>
 
-------------------
 
 ## How many teams were involved in midseason trades? Which team had the most traded players on their roster?
 Note: Any one trade tranaction will result in 2 or more players on the roster involved in a trade. Trades in this output refers to traded players on the roster, not to trade transactions.
@@ -138,7 +136,6 @@ ORDER BY count_trades DESC <br>
 
 **Results:** 27 of the 30 team were involved in a trade. The Los Angeles Lakers, with 13 traded players on their roster, had the most traded players. A complete listing with all 30 teams can be found in the next query.
 
--------------------------------------
 ### Query that returns all 30 teams with a count of how many players on their 2022-23 roster were traded during the season and their winning percentage.
 
 Note: Any one trade will result in 2 or more players on the roster involved in a trade. This query returns all 30 teams, including 3 that did not make trades. For these 3 teams, count_trades is originally NULL, but the NULL is replaced
