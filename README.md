@@ -66,35 +66,32 @@ The complete list of all 26 foreign players can be found in [current_foreign_pla
 # Traded Players
 ## How many players played for more than one team during the 2022-2023 season?
 
-SELECT count(*) as count_teams,
-		player_name
-FROM player_stats
-GROUP BY player_name
-HAVING count(*) > 1
-ORDER BY count_teams DESC, player_name
-;
+SELECT count(*) as count_teams, player_name<br>
+FROM player_stats AS ps<br>
+GROUP BY player_name<br>
+HAVING count(*) > 1<br>
+ORDER BY count_teams DESC, player_name<br>
+;<br>
 
 **Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
 The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
 
 ## What were the positions of the traded players?
 
-SELECT pos, count() as count_position<br>
+SELECT pos, count(*) as count_position<br>
  FROM<br>
-(<br>
-	SELECT count(*) AS count_teams, <br>
-		   player,pos <br>
-	FROM player_stats <br>
-	GROUP BY player <br>
-	HAVING count(*) > 1 <br>
-	ORDER BY count_teams DESC <br>
-) <br>
+&emsp;	(<br>
+&emsp;		SELECT count(*) AS count_teams, <br>
+&emsp;&emsp;				   player,pos <br>
+&emsp;		FROM player_stats <br>
+&emsp;		GROUP BY player <br>
+&emsp;		HAVING count(*) > 1 <br>
+&emsp;		ORDER BY count_teams DESC <br>
+&emsp;	) <br>
 GROUP BY pos <br>
 ; <br>
 
 **Result:** Positions of the traded players are fairly evenly distributed, with point guards and shooting guards being traded slightly more often than other positions.
-
-![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/9b3cd005-ddbf-4c68-8245-a62cfca4069a)
 
 <img width="122" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/1c6d5289-0523-481d-90c8-fdd4b0264938">
 
