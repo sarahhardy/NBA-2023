@@ -172,8 +172,7 @@ ON ts.abbreviation = team.abbreviation
 ORDER BY count_trades DESC <br>
 ; <br>
 
-**Result:** There is no obvious relationship between number of trades and winning percentage, but this winning percentage includes games before and after the trade was made and also does not include playoff games. Note that the NBA 2023 champions, the Denver Nuggets, had the 4th highest win percentage and 4 traded players which was the median number of trades. Their opponents in the championship game, the Miami Heat, had the 13th highest winning percentage and also had 4 traded players.   [team_trades_and_winpts.csv](team_trades_and_winpts.csv).<br>
-
+**Result:** There is no obvious relationship between number of trades and winning percentage, but this winning percentage includes games before and after the trade was made and also does not include playoff games. Note that the NBA 2023 champions, the Denver Nuggets, had the 4th highest win percentage and 4 traded players which was the median number of trades. Their opponents in the championship game, the Miami Heat, had the 13th highest winning percentage and also had 4 traded players. the complete results ordered by number of trade players can be found in   [team_trades_and_winpts.csv](team_trades_and_winpts.csv) and ordred by winning percentage in  [team_winpts_and trades.csv](team_winpts_and_trades.csv).<br>
 
 --------------------
 # Data Sources:
