@@ -66,31 +66,14 @@ The complete list of all 26 foreign players can be found in [current_foreign_pla
 # Traded Players
 ## How many players played for more than one team during the 2022-2023 season?
 
-
-SELECT count(*) AS count_teams,  player <br>
-FROM player_stats <br>
-GROUP BY player <br>
-HAVING count(*) > 1 <br>
-ORDER BY count_teams DESC, player <br>
-
-SELECT player, count_teams<br>
- FROM <br>
- ( <br>
-&emsp;	SELECT count(*) AS count_teams,  player <br>
-&emsp;	FROM player_stats <br>
-&emsp;	GROUP BY player <br>
-&emsp;	HAVING count(*) > 1 <br>
-&emsp;	ORDER BY count_teams DESC, player <br>
-) <br>
-; <br>
-
-SELECT count(*) AS count_teams,
-		player 
+SELECT count(*) as count_teams,
+		player_name
 FROM player_stats
-GROUP BY player
+GROUP BY player_name
 HAVING count(*) > 1
-ORDER BY count_teams DESC
+ORDER BY count_teams DESC, player_name
 ;
+
 **Result:** 70 players played for 2 teams during the 2022-2023 season. No players played for 3 teams.
 The complete list of all 70 players can be found in  [traded_players.csv](traded_players.csv).
 
