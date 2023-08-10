@@ -12,8 +12,7 @@ WHERE year_founded =<br>
 ORDER BY abbreviation ASC<br>
 ;<br>
 **Results:** <br>
-<img width="281" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/89afe0e9-543a-4478-9d59-9c1b1aaf34a6">
-
+![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/b7a986fb-a2dd-4c0a-988d-fc8ef194a97a)
 -----------------------------------
 # Foreign Talent
 
@@ -29,7 +28,8 @@ HAVING count >=2<br>
 ORDER BY count DESC<br>
 ;<br>
 **Results:** <br>
-<img width="114" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/6e6265fe-c15e-48ec-9d59-9f003f79876d">
+
+![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/07db2636-a2ac-454c-8dac-a47282a41a7b)
 
 ## Currently active foreign talent
 ### How many currently active players came to the NBA from a country other than the USA?
@@ -93,7 +93,7 @@ GROUP BY pos <br>
 
 **Result:** Positions of the traded players are fairly evenly distributed, with point guards and shooting guards being traded slightly more often than other positions.
 
-<img width="122" alt="image" src="https://github.com/sarahhardy/NBA-2023/assets/7597401/1c6d5289-0523-481d-90c8-fdd4b0264938">
+![image](https://github.com/sarahhardy/NBA-2023/assets/7597401/931472c6-cfd1-4216-a50a-2187de9fdd7b)
 
 ## Which teams did the traded players play for?
 
